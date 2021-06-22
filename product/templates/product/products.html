@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All products Page | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/product/static/css/products.css">
+{% endblock %}
+
+
+{% block main %}
+
+		<!------------ All Products -------->
+		<div class="small-container">
+			{% if products|length > 0 %}
+			<div class="row row-2">
+				<h2>All Products</h2>
+				<form id="target" action="/product" method="get">
+				<select id="sort" name="sort">
+					<option value="" {% if sort == '' %} selected {% endif %}>Default Sorting</option>
+					<option value="lth" {% if sort == 'lth' %} selected {% endif %}>Sort by price: Low to High</option>
+					<option value="htl" {% if sort == 'htl' %} selected {% endif %}>Sort by Price High to Low</option>
+					<option value="nf" {% if sort == 'nf' %} selected {% endif %}>Sort by Newer First</option>
+				</select>
+				</form>
+			</div>
+
+			<div class="row">
+			{% for product in products %}
+				<div class="col-4">
+					<a href="/product/detail?p={{ product.product_id }}">
+					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id }}a.jpg">
+					<h4>{{ product.product_name }}</h4>
+					<p>&#8377; {{ product.price }}</p>
+					</a>
+				</div>
+				{% if loop.index != 0 and loop.index % 4 == 0 %}
+			</div>
+			<div class="row">
+
+				{% endif %}
+			{% endfor %}
+			</div>
+
+
+
+			<div class="page-btn">
+
+				{% if page != '1' %}
+				<a href="/product/{{ (page|int - 1)|string }}?sort={{ sort }}">&#8592;</a>
+				{% endif %}
+
+				{% for i in range(total_pages|int) %}
+					{% if i+1 == page|int %}
+						<a class="active">{{ i+1 }}</a>
+					{% else %}
+						<a href="/product/{{ (i+1)|string }}?sort={{ sort }}">{{ i+1 }}</a>
+					{% endif %}
+				{% endfor %}
+
+				{% if page != total_pages and total_pages != '0' %}
+				<a href="/product/{{ (page|int + 1)|string }}?sort={{ sort }}">&#8594;</a>
+				{% endif %}
+			</div>
+		{% else %}
+			<div class="no-product"><h1>No product, Comeback later.</h1></div>
+		{% endif %}
+		</div>
+		<script>
+        $(document).ready(function(){
+            $("#sort").change( function(){
+                $("#target").submit();
+            });
+        });
+    </script>
+{% endblock %}

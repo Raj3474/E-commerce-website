@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Product Detail | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/product/static/css/singleProduct.css">
+{% endblock %}
+
+{% block main %}
+	<!------------ A single Product detail -------->
+
+		<div class="small-container single-product">
+			<div class="row">
+				<div class="col-2">
+					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}a.jpg" width="250px" height="320px" id="ProductImg">
+
+					<div class="small-img-row">
+						<div class="small-img-col">
+							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}a.jpg" width="100%" class="small-img">
+						</div>
+						<div class="small-img-col">
+							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}b.jpg" width="100%" class="small-img">
+						</div>
+						<div class="small-img-col">
+							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}c.jpg" width="100%" class="small-img">
+						</div>
+						<div class="small-img-col">
+							<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id}}d.jpg" width="100%" class="small-img">
+						</div>
+					</div>
+				</div>
+				<div class="col-2">
+					<div class="product-detail">
+						<p>Home / jerseys</p>
+						<h1>{{ product.product_name }}</h1>
+						<h4>&#8377; {{ product.price }}</h4>
+
+						<form action="/product/addToCart">
+							<input style="display:none" type="text" name="p" value="{{ product.product_id }}">
+							<select name="s">
+								<option disabled Selected>Select Size</option>
+								{% for size in product.sizes_available %}
+								<option value="{{ size }}">
+									{% if size == 's' %}
+										Small
+									{% elif size == 'm' %}
+										Medium
+									{% elif size == 'l' %}
+										Large
+									{% elif size == 'xl' %}
+										XL
+									{% else %}
+										XXL
+									{% endif %}
+								</option>
+								{% endfor %}
+							</select>
+							<input name="q" type="number" value="1" min="1">
+							<button class="btn">Add To Cart</button>
+						</form>
+						<h3>Product Details <span class="fa fa-indent"></span></h3>
+						<p>
+							{{ product.productDesc }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!------------- title ----------->
+		<div class="small-container">
+			<div class="row row-2">
+				<h2>Related Products</h2>
+				<a href="/product"><p>View More</p></a>
+			</div>
+
+		</div>
+
+
+		<!------------ Related products ----------------->
+		<div class="small-container">
+			<div class="row">
+				{% for product in related_products %}
+				<div class="col-4">
+					<a href="/product/detail?p={{ product.product_id }}">
+					<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/{{ product.product_id }}a.jpg">
+					<h4>{{ product.product_name }}</h4>
+					<p>&#8377; {{ product.price }}</p>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+
+
+		<!----------- js for product details --------------->
+		<script>
+			var ProductImg = document.getElementById("ProductImg");
+			var SmallImg = document.getElementsByClassName("small-img");
+
+			SmallImg[0].onclick = function() {
+				ProductImg.src = SmallImg[0].src;
+			}
+
+			SmallImg[1].onclick = function() {
+				ProductImg.src = SmallImg[1].src;
+			}
+
+			SmallImg[2].onclick = function() {
+				ProductImg.src = SmallImg[2].src;
+			}
+
+			SmallImg[3].onclick = function() {
+				ProductImg.src = SmallImg[3].src;
+			}
+		</script>
+{% endblock %}
