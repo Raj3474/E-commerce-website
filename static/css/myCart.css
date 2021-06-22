@@ -1,0 +1,152 @@
+/*-------------- cart items -----------------*/
+
+.link{
+	padding: 20px;
+}
+
+.fa-caret-right {
+	margin: 0 10px;
+    font-size: 24px !important;
+    color: #52e852;
+}
+
+.link a{
+	display: inline-block;
+	background: #ff523b;
+	color: #fff;
+	border-radius: 30px;
+	transition: background 0.5s;
+	font-size: 18px;
+	padding: 8px 20px;
+}
+
+.link a:hover{
+	background: #563434;
+}
+
+.cart-container{
+	margin: 25px auto 50px;
+	max-width: 1080px;
+	padding: 0 25px;
+}
+
+.my-cart-title{
+	text-align: left;
+	color: #555;
+	margin-left: 12px;
+	margin: 20px;
+	position: relative;
+}
+
+.my-cart-title:after{
+	content: "";
+    display: block;
+    margin: 0 auto;
+    width: 68px;
+    position: absolute;
+    left: 27px;
+    top: 44px;
+    border-bottom: 4px solid #ff523b;
+    z-index: -1;
+}
+
+.cart-info{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th{
+	text-align: left;
+	padding: 5px;
+	color: #fff;
+	background: #88ff25;
+	font-weight: 900;
+}
+td{
+	margin: 10px;
+	padding: 10px 5px;
+}
+
+td a{
+	color: #ff523b;
+	font-size: 12px;
+}
+
+
+tr img{
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+}
+
+.total-price{
+	margin: 25px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.total-price table{
+	border-top: 3px solid #ff523b;
+	width: 100%;
+	max-width: 400px;
+}
+
+td:last-child{
+	text-align: right;
+}
+
+th:last-child{
+	text-align: right;
+}
+
+.order-btn-div{
+	display: flex;
+	justify-content: flex-end;
+
+	margin: 15px;
+}
+
+.order-btn{
+	display: inline-block;
+	background: #ff523b;
+	color: #fff;
+	padding: 8px 30px;
+	margin: 10px 0;
+	border-radius: 30px;
+	transition: background 0.5;
+
+	width: 200px;
+	height: 45px;
+
+	outline: none;
+	border: none;
+}
+
+.order-btn:hover{
+	cursor: pointer;
+	background: #563434;
+}
+
+
+@media only screen and (max-width: 600px)
+{
+	.cart-container{
+		padding: 0 10px;
+	}
+
+	.link {
+		padding: 10px;
+	}
+	.order-btn-div a{
+		margin: auto;
+	}
+
+	.my-cart-title{
+		margin-top: 0px;
+	}
+}

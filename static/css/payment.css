@@ -1,0 +1,127 @@
+/*------------- payment-container --------------*/
+.payment-container{
+	margin: 25px 0;
+    padding: 25px 0;
+    background: linear-gradient(40deg, #f9ff8c52, #e5ff2c);
+}
+
+
+
+.form-container{
+	background: #fff;
+	max-width: 380px;
+	height: 550px;
+	position: relative;
+	text-align: center;
+	padding: 15px 0;
+	margin: 20px auto;
+	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, .1);
+	overflow: hidden;
+}
+
+
+.form-container div{
+	max-width: 300px;
+	padding: 0 20px;
+	position: absolute;
+	transition: transform 0.5s;
+}
+
+.form-container p{
+	position: relative;
+	font-size: 35px;
+	width: 150px;
+	margin: auto;
+}
+
+
+.form-container p:after{
+	content: '';
+	background: #ff523b;
+	height: 5px;
+	border-radius: 5px;
+	position: absolute;
+	width: 173px;
+    top: 47px;
+    left: -9px;
+}
+
+form{
+	position: relative;
+	top: 20px;
+}
+
+	/*display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #d98d8d;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+
+
+input, textarea, select{
+	border: 1px solid #ccc;
+	width: 80%;
+	height: 40px;
+	margin: 10px 0;
+	padding: 10px 10px;
+	border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s
+}
+
+input:focus, textarea:focus, select:focus{
+
+	border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+
+
+textarea {
+    margin: 5px 0 5px;
+    padding: 10px 20px 10px;
+    height: 70px;
+    width: 80%;
+    resize: none;
+}
+
+input[name="city"]{
+	width: 50%;
+	margin-right: 15px;
+}
+
+
+input[name="pincode"]{
+	width: 25%;
+}
+select {
+	width: 50%;
+}
+
+.btn{
+	display: inline-block;
+	background: #ff523b;
+	color: #fff;
+	padding: 8px 30px;
+	margin: 20px 0;
+	border-radius: 30px;
+	transition: background 0.5s;
+	cursor: pointer;
+	border: solid 2px #e01a00;
+}
+.btn:hover{
+	background: #563434;
+	border-color: #555;
+}
+
+.btn:focus{
+	outline: none;
+}

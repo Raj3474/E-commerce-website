@@ -1,0 +1,140 @@
+/*------------- account-page --------------*/
+
+.account-page{
+    margin: 25px 0;
+    padding: 25px 0;
+    background: linear-gradient(40deg, #f9ff8c52, #e5ff2c);
+}
+
+.form-container{
+	background: #fff;
+	width: 300px;
+	height: 347px;
+	position: relative;
+	text-align: center;
+	padding: 20px 0;
+	margin: auto;
+	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, .1);
+	overflow: hidden;
+}
+
+
+#account-form
+{
+	transition: transform 0.5s;
+}
+
+.form-container span{
+	font-weight: bold;
+	padding: 0 10px;
+	color: #555;
+	cursor: pointer;
+	width: 100px;
+	display: inline-block;
+
+}
+
+
+.form-btn{
+	display: inline-block;
+}
+
+.form-container form{
+	max-width: 300px;
+	padding: 0 20px;
+	position: absolute;
+	transition: transform 0.5s;
+}
+
+form input{
+	width: 80%;
+	height: 30px;
+	margin: 10px 0;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+}
+
+form .btn{
+
+	border: none;
+	cursor: pointer;
+	margin: 10px 0;
+}
+
+
+form input:focus, .btn:focus{
+	outline: none;
+}
+
+
+#LoginForm{
+	top: 100px;
+	left: -300px;
+}
+
+#RegForm{
+	top: 81px;
+	left: 0;
+}
+
+
+form a{
+	font-size: 12px;
+}
+
+#Indicator{
+	width: 98px;
+	border: none;
+	background: #ff523b;
+	height: 5px;
+	margin-top: 2px;
+	transform: translateX(114px);
+	transition: transform 0.5s;
+}
+
+#Otp-form{
+	width: 300px;
+    margin: auto;
+    position: absolute;
+    left: 300px;
+    top: 33px;
+
+    transition: transform 0.5s;
+}
+
+
+#Otp-form p:after{
+	content: '';
+	background: #ff523b;
+	height: 5px;
+	border-radius: 5px;
+	position: absolute;
+	width: 50px;
+	top: 26px;
+	left: 126px;
+}
+
+
+#Otp-form form{
+	width: 100%;
+	top: 150px;
+}
+
+.otp-mssg{
+	padding: 15px;
+	margin: 10px 15px 0px;
+	font-size: 15px;
+	color: #555;
+}
+
+#Otp-form input[name="otp"]{
+
+	width: 100px;
+}
+
+@media only screen and (max-width: 600px)
+{
+	.account-page{
+		padding-top: 16px;
+	}
+}

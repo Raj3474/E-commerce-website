@@ -1,0 +1,185 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    user Login | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/users/static/css/login.css">
+{% endblock %}
+
+
+{% block main %}
+
+	<!--------------- account page ------------>
+	<div id="alert"></div>
+
+	<div class="account-page">
+		<div class="row">
+			<div class="col-2">
+				<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/logo3.jpg">
+			</div>
+			<div class="col-2">
+				<div class="form-container">
+					<div id="account-form">
+						<div class="form-btn">
+							<span onclick="login()">Login</span>
+							<span onclick="register()">Registration</span>
+							<hr id="Indicator">
+						</div>
+
+						<form action="/users/login" method="post" id="LoginForm">
+							<input type="text" placeholder="Email Id" name="email">
+							<input type="password" placeholder="password" name="pass">
+							<button type="submit" class="btn" id="loginBtn">Login</button>
+						<br>
+							<a href="/users/forgotPassword">Forgot Password</a>
+						</form>
+
+						<form method="post" id="RegForm" action="/users/registerUser">
+							<input type="email" placeholder="Email" name="email" id="email" autocomplete="off">
+							<input type="password" placeholder="Password" name="pass">
+							<input type="password" placeholder="Confirm Password" name="confpass">
+							<button type="submit" id="regisBtn" class="btn">Registration</button>
+						</form>
+					</div>
+					<div id="Otp-form">
+						<p>Otp</p>
+						<div class="otp-mssg">An otp has been sent to your Email Address. Enter the OTP</div>
+						<form method="post" >
+							<input type="text" placeholder="Otp" name="otp" autocomplete="off">
+							<br>
+							<button type="submit" class="btn" id="submitOtpBtn">Submit Otp</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		{% if loginForm %}
+			#LoginForm{
+				transform: translateX(300px);
+			}
+
+			#RegForm{
+				transform: translateX(300px);
+			}
+
+			#Indicator{
+				transform: translateX(0);
+			}
+
+		{% endif %}
+	</style>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+	<script>
+
+		var LoginForm = document.getElementById("LoginForm");
+		var RegFrom = document.getElementById("RegForm");
+		var Indicator = document.getElementById("Indicator");
+
+
+
+		function register() {
+			RegForm.style.transform = "translateX(0px)";
+			LoginForm.style.transform = "translateX(0px)";
+			Indicator.style.transform = "translateX(114px)";
+		}
+
+		function login() {
+			RegForm.style.transform = "translateX(300px)";
+			LoginForm.style.transform = "translateX(300px)";
+			Indicator.style.transform = "translateX(0px)";
+		}
+
+        $(document).ready( function(){
+
+
+			$('#loginBtn').click(function(e){
+
+				e.preventDefault();
+
+
+				var email = $('#LoginForm').find( "input[name='email']" ).val()
+				var pass = $('#LoginForm').find( "input[name='pass']" ).val()
+
+				$.post('/users/login', {'email': email, 'pass': pass}, function(data){
+
+					if(data.status == 'success')
+					{
+						window.location.href = "/";
+	            	}
+	            	else if (data.status == 'error') {
+	                	$('.alert').html(data.message).slideDown("slow")
+											  .addClass("flash-danger").delay(2000).slideUp(1000);
+	                	// $('#username').css('border', 'rgb(255, 153, 153) solid 1px')
+	            	}
+
+				})
+
+			})
+
+            $('#regisBtn').click(function(e){
+
+                e.preventDefault();
+
+	    		var password = $("#RegForm").find( "input[name='pass']" ).val()
+	    		var confpassword = $("#RegForm").find( "input[name='confpass']" ).val()
+				var email = $('#email').val();
+
+	        	$.post('/users/registration', {'email': email, 'pass': password, 'confpass': confpassword}, function(data){
+
+	            	if(data.status == 'success'){
+
+	                	// $('#username').css('border', '#28a745 solid 1px');
+						document.getElementById("account-form").style.transform = "translateX(-300px)";
+						document.getElementById("Otp-form").style.transform = "translateX(-300px)";
+
+	            	}
+	            	else if (data.status == 'error') {
+	                	$('.alert').slideUp(100).html(data.message).slideDown("slow")
+											  .addClass("flash-danger").delay(2000).slideUp(1000);
+	                	// $('#username').css('border', 'rgb(255, 153, 153) solid 1px')
+	            	}
+	        	});
+        	});
+
+
+			$('#submitOtpBtn').click(function(e){
+
+				e.preventDefault();
+
+				var otp = $("#Otp-form").find( "input[name='otp']" ).val()
+
+				$.post("/users/otp", { 'otp': otp }, function(data){
+
+					if (data.status == 'error')
+					{
+
+						$('.alert').html(data.message).slideDown("slow")
+												  .addClass("flash-success").delay(3000).slideUp(1000);
+
+						$("#Otp-form").find( "input[name='otp']" ).val("");
+
+					}
+					else if (data.status == 'success')
+					{
+						$("#RegForm").submit()
+					}
+
+				});
+
+			})
+
+        });
+
+		</script>
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Orders | Fitkit
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/static/css/myOrders.css">
+{% endblock %}
+
+{% block main %}
+
+		<!--------------- Orders ------------->
+
+		<div class="small-container order-page">
+			<div class="link">
+				<i class="fa fa-caret-right"></i>
+				<a href="/myCart">My Cart &#8594;</a>
+			</div>
+
+			<h1 class="my-order-title">Latest Orders</h1>
+			<table>
+				<thead>
+					<tr>
+						<th id="product">Product</th>
+						<th id="size">size</th>
+						<th id="quantity">Quantity</th>
+						<th id="price">Price</th>
+						<th id="address">Address</th>
+						<th id="order-status">Order Status</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if latest_orders|length > 0%}
+						{% for order in latest_orders %}
+							{% for product in order.products_id %}
+							<tr {% if loop.index == order.products_id|length %} class="last-row-of-an-order"{% endif %}>
+								<td>
+									<div class="cart-info">
+										<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+										<div>
+											<p>{{ order.products_name[loop.index - 1] }}</p>
+										</div>
+									</div>
+								</td>
+								<td>{{ order.quantities[loop.index - 1] }}</td>
+								<td>{{ order.sizes[loop.index - 1] }}</td>
+								<td>{{ order.products_price[loop.index - 1] }}</td>
+
+								{% if loop.index == 1 %}
+								<td class="address" rowspan="{{ order.products_id|length }}">
+									Deliver To: {{ order.address}}
+								</td>
+								<td class="order-status"rowspan="{{ order.products_id|length }}">
+									{% if order.status == 'o' %}
+										Order Recieved
+									{% elif order.status == "d" %}
+										Order Dispatched
+									{% endif %}
+								</td>
+								{% endif %}
+							</tr>
+							{% endfor %}
+						{% endfor %}
+					{% else %}
+						<tr><td class="no-product" colspan="6"><h1>No Open Order Now.</h1></td></tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+
+
+        <div class="small-container order-page">
+			<h1 class="my-completed-order-title">Completed Orders</h1>
+			<table>
+				<thead>
+					<tr>
+						<th id="product">Product</th>
+						<th id="size">size</th>
+						<th id="quantity">Quantity</th>
+						 <th id="price">Price</th>
+						<th id="address">Address</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if completed_orders|length > 0 %}
+						{% for order in completed_orders %}
+							{% for product in order.products_id %}
+							<tr {% if loop.index == order.products_id|length %} class="last-row-of-an-order"{% endif %}>
+								<td>
+									<div class="cart-info">
+										<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+										<div>
+											<p>{{ order.products_name[loop.index - 1] }}</p>
+										</div>
+									</div>
+								</td>
+								<td>{{ order.quantities[loop.index - 1] }}</td>
+								<td>{{ order.sizes[loop.index - 1] }}</td>
+								<td>{{ order.products_price[loop.index - 1] }}</td>
+
+								{% if loop.index == 1 %}
+								<td class="address" rowspan="{{ order.products_id|length }}">
+									Deliver To: {{ order.address}}
+								</td>
+								{% endif %}
+							</tr>
+							{% endfor %}
+						{% endfor %}
+					{% else %}
+						<tr><td class="no-product" colspan="5"><h1>No Completed Order.</h1></td></tr>
+					{% endif %}
+				</tbody>
+			</table>
+		</div>
+
+{% endblock %}

@@ -1,0 +1,235 @@
+/*---------- orders -----------------*/
+
+.link{
+	padding: 20px;
+}
+
+.fa-caret-right {
+	margin: 0 10px;
+    font-size: 24px !important;
+    color: #52e852;
+}
+
+.link a{
+	display: inline-block;
+	background: #ff523b;
+	color: #fff;
+	border-radius: 30px;
+	transition: background 0.5s;
+	font-size: 18px;
+	padding: 8px 20px;
+}
+
+.link a:hover{
+	background: #563434;
+}
+
+.small-container{
+	max-width: 1200px;
+	margin: auto;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.order-page{
+	margin: 20px auto 80px;
+}
+
+.my-order-title{
+	position: relative;
+	text-align: left;
+	color: #555;
+	margin-left: 12px;
+	margin: 20px;
+}
+
+.my-order-title:after{
+	content: "";
+	display: block;
+	margin: 0 auto;
+	width: 215px;
+	position: absolute;
+	bottom: 1px;
+	border-bottom: 4px solid #ff523b;
+
+	z-index: -1;
+}
+
+.my-completed-order-title{
+	position: relative;
+	text-align: left;
+	color: #555;
+	margin-left: 12px;
+	margin: 20px;
+}
+
+.my-completed-order-title:after{
+	content: "";
+	display: block;
+	margin: 0 auto;
+	width: 297px;
+	position: absolute;
+	bottom: 1px;
+	border-bottom: 4px solid #ff523b;
+
+	z-index: -1;
+}
+
+table{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+th{
+	text-align: center;
+	padding: 10px;
+	color: #fff;
+	background: #88ff25;
+	font-weight: normal;
+}
+
+#address{
+	max-width: 150px;
+	}
+
+.address{
+	text-align: left;
+	max-width: 150px;
+}
+
+td a{
+	width: 55px;
+	height: 16px;
+	color: #555;
+	font-size: 12px;
+	border-radius: 4px;
+	background-color: orange;
+}
+
+
+
+td{
+	text-align:center !important;
+	padding: 0 20px 0;
+	border-bottom: solid 1px gray;
+}
+
+
+tr img{
+	width: 60px;
+	height: 80px;
+	margin-right: 10px;
+}
+
+
+
+
+.order-info{
+	display: block;
+	flex-wrap: wrap;
+}
+
+.order-info div{
+	margin: 5px;
+	}
+
+
+.address, .last-row-of-an-order, .order-status{
+	margin-bottom: 100px;
+	border-bottom: solid 2px #00ff2b;
+}
+
+#product{
+    width: 15%;
+}
+
+#size, #price, #quantity{
+    width: 10%;
+}
+
+#address{
+    width: 35%;
+}
+
+#order-status{
+    width: 15%;
+}
+
+@media only screen and (max-width: 600px)
+{
+	.order-page{
+		padding: 0 10px;
+	}
+
+	.link {
+		padding: 10px;
+	}
+	.order-btn-div a{
+		margin: auto;
+	}
+
+	.my-order-title{
+		margin-top: 0px;
+	}
+	.my-completed-order-title{
+		margin-top: 0px;
+	}
+
+}
+
+/*-------- media query for menu only ---------*/
+
+
+@media only screen and (max-width: 500px)
+{
+	.container{
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	.address{
+		font-size: 10px;
+
+	}
+	h1{
+		font-size: 25px;
+	}
+
+	.order-page{
+		margin: 50px auto;
+	}
+	.my-order-title:after{
+	width: 170px;
+	}
+	.my-completed-order-title:after{
+	width: 230px;
+	}
+	.small-container
+	{
+		margin: 40px auto;
+		padding-left: 9px;
+		padding-right: 9px;
+	}
+
+	table{
+		font-size: 10px;
+		width: 100%;
+		padding: 0 auto 0;
+		margin: 0 auto 0;
+		margin-bottom: 20px;
+		}
+
+	th {
+		padding: 4px;
+	}
+
+	td, td button{
+		padding: 5px 1px 0;
+	}
+
+
+	tr img{
+	width: 40px;
+	height: 60px;
+	margin-right: 2px;
+}
+}
