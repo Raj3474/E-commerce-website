@@ -3,5 +3,5 @@
 **An E-commerce webiste using-**
 * python-flask
 * html, css, javascript, jQuery
-* Aws-database
+* Aws-postgresql-database
 * Aws-S3 buckets
