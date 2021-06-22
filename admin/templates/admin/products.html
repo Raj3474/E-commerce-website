@@ -1,0 +1,64 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}
+	All Registered Products | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="/admin/static/css/products.css">
+{% endblock %}
+
+{% block main %}
+		<!--------------- all products ------------->
+
+	<div class="product-container">
+
+		<h1>All products</h1>
+
+
+		<div class="grid-container">
+
+			{% for product in products %}
+
+			<div class="grid-item" id="{{ product.product_id }}">
+				<div class="row">
+					<div class="grid-col-1">
+						<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product.product_id }}.jpg">
+					</div>
+					<div class="grid-col-2">
+						<div>&#8377; {{ product.price }}</div>
+						<div>{{ product.sizes_available }}</div>
+					</div>
+				</div>
+				<p>{{ product.productName }}</p>
+				<button>Remove</button>
+			</div>
+			{% endfor %}
+	</div>
+	</div>
+		<!----------- js for product removal ------------------>
+		<script>
+
+			$(document).ready(function (){
+
+
+				$('button').click(function(){
+
+					var productId = $(this).parent(".grid-item").attr("id")
+
+
+					$.get('/admin/removeProduct?p=' + productId, function(data) {
+
+						if (data)
+						{
+							$('#' + productId).slideLeft(500).remove();
+							$('.alert').slideDown("slow").html('Product Successfully Removed')
+											  .addClass("flash-success").delay(1500).slideUp(1000);
+
+						}
+					})
+				})
+			})
+		</script>
+{% endblock %}

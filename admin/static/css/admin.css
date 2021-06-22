@@ -1,0 +1,153 @@
+
+/*------------- admin login page --------------*/
+
+.form-body{
+	margin: 25px 0;
+	padding: 25px 0;
+	background: linear-gradient(40deg, #f9ff8c52, #e5ff2c);
+}
+
+
+.form-container{
+	background: #fff;
+	width: 300px;
+	height: 350px;
+	position: relative;
+	text-align: center;
+	padding: 20px 0;
+	margin: auto;
+	box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, .1);
+	overflow: hidden;
+}
+
+
+.form-container>div{
+	max-width: 300px;
+	padding: 0 20px;
+	position: absolute;
+	transition: transform 0.5s;
+}
+
+#Login-form{
+	left: 0px;
+	top: 50px;
+	transition: transform 0.5s;
+}
+
+#Login-form form{
+	position: relative;
+	top: 70px;
+}
+
+
+#Otp-form input{
+	width: 50%;
+	height : 50px;
+}
+
+#Otp-form{
+	position: relative;
+	transition: transform 0.5s;
+	top: 40px;
+	left: -300px;
+}
+
+
+p:after{
+	content: '';
+	background: #ff523b;
+	height: 5px;
+	border-radius: 5px;
+	position: absolute;
+}
+
+
+#Login-form p:after{
+	width: 102px;
+    left: 94px;
+    top: 25px;
+}
+
+#Otp-form p:after{
+	width: 111px;
+    left: 94px;
+    top: 25px;
+}
+
+
+form input{
+	width: 100%;
+	height: 30px;
+	margin: 10px 0;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+}
+
+
+input:focus{
+	outline: none;
+}
+
+
+
+.otp-mssg{
+	padding: 15px;
+	margin: 10px 15px 0px;
+	font-size: 15px;
+	color: #555;
+}
+
+form .btn{
+
+	border: none;
+	cursor: pointer;
+	margin: 10px 0;
+}
+
+form .btn:focus{
+	outline: none;
+}
+
+form a{
+	font-size: 12px;
+}
+.btn{
+	display: inline-block;
+	background: #ff523b;
+	color: #fff;
+	padding: 8px 30px;
+	margin: 30px 0;
+	border-radius: 30px;
+	transition: background 0.5;
+}
+
+.btn:hover{
+	background: #563434;
+}
+
+
+
+
+
+/*----------- media query for less than 600 screen size -------------*/
+@media only screen and (max-width: 600px){
+
+
+	.form-body{
+		padding: 20px 0;
+	}
+
+	.admin-otp{
+		padding: 20px 0;
+	}
+
+	.form-container{
+		margin: 10px auto;
+	}
+
+	.form-container form{
+		max-width: 250px;
+		top: 90px;
+		left: 0px;
+	}
+}

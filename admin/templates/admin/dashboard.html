@@ -1,0 +1,154 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}
+	Admin Dashboard | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="/admin/static/css/dashboard.css">
+{% endblock %}
+
+{% block main %}
+
+		<!--------------- Add New Product -------->
+		<div class="add-product-container">
+			<h1>Add New Product :</h1>
+			<div class="add-product-form-container">
+				<form method="POST" action="/admin/add_product" class="add_product" enctype="multipart/form-data">
+					<div class="form-input">
+						<input type="text" name="product" placeholder="Product Name">
+					</div>
+					<div class="form-input">
+						<input type="number" name="price" placeholder="Price">
+					</div>
+					<div class="form-checkbox">
+						<div class="form-checkbox-text">Available In:</div>
+						<div class="checkbox">
+							<div>
+								<input type="checkbox" name="size" value="s" id="small">
+								<label for="small">Small</label>
+							</div>
+							<div>
+								<input type="checkbox" name="size" value="m" id="medium">
+								<label for="medium">Medium</label>
+							</div>
+							<div>
+								<input type="checkbox" name="size" value="l" id="large">
+								<label for="large">Large</label>
+							</div>
+							<div>
+								<input type="checkbox" name="size" value="xl" id="x-large">
+								<label for="x-large">X-Large</label>
+							</div>
+							<div>
+								<input type="checkbox" name="size" value="xxl" id="xx-large">
+								<label for="xx-large">XX-Large</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-file">
+						<!--<input type="file" max="4" multiple name="img[]" accept="image/*"/>-->
+						<!--<input type="file" max="4" multiple name="file" accept="image/*"/>-->
+						<input type="file" multiple name="file" />
+					</div>
+					<div class="form-desc">
+						<textarea name="productdesc" placeholder="About Product"></textarea>
+						</div>
+					<div class="form-button">
+						<button class="btn" type="submit">Add</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+
+
+
+
+		<!--------------- Orders ------------->
+
+		<div class="small-container order-page">
+			<h1 class="my-order-title">Latest Orders</h1>
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>size</th>
+						<th>Quantity</th>
+						<th id="address">Address</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in latest_orders %}
+						{% for product in order.products_id %}
+						<tr {% if loop.index == order.products_id|length %} class="last-row-of-an-order"{% endif %}>
+							<td>
+								<div class="cart-info">
+									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<div>
+										<p>{{ order.products_name[loop.index - 1] }}</p>
+									</div>
+								</div>
+							</td>
+							<td>{{ order.quantities[loop.index - 1] }}</td>
+							<td>{{ order.sizes[loop.index - 1] }}</td>
+
+							{% if loop.index == 1 %}
+							<td class="address" rowspan="{{ order.products_id|length }}">
+								Deliver To: {{ order.address}}
+							</td>
+							<td class="button" rowspan="{{ order.products_id|length }}"><a href="/admin/updateOrder/dispatched?p={{ order.order_id }}">Dispatch</a></td>
+							{% endif %}
+						</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="small-container order-page">
+			<h1 class="my-order-title">Dispatched Orders</h1>
+			<table>
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>size</th>
+						<th>Quantity</th>
+						<th id="address">Address</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for order in dispatched_orders %}
+						{% for product in order.products_id %}
+						<tr {% if loop.index == order.products_id|length %} class="last-row-of-an-order"{% endif %}>
+							<td>
+								<div class="cart-info">
+									<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/thumbnails/{{ product }}.jpg">
+									<div>
+										<p>{{ order.products_name[loop.index - 1] }}</p>
+									</div>
+								</div>
+							</td>
+							<td>{{ order.quantities[loop.index - 1] }}</td>
+							<td>{{ order.sizes[loop.index - 1] }}</td>
+
+							{% if loop.index == 1 %}
+							<td class="address" rowspan="{{ order.products_id|length }}">
+								Deliver To: {{ order.address}}
+							</td>
+							<td class="button" rowspan="{{ order.products_id|length }}"><a href="/admin/updateOrder/completed?p={{ order.order_id }}">Delivered</a></td>
+							{% endif %}
+						</tr>
+						{% endfor %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<!----------- js for toggle menu ------------------>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "admin/layout.html" %}
+
+{% block title %}
+	Admin Login | Fitkit
+{% endblock %}
+
+{% block css %}
+	<!--stylesheets-->
+	<link rel="stylesheet" href="/admin/static/css/admin.css">
+{% endblock %}
+
+{% block main %}
+	<div class="form-body">
+		<div class="row">
+			<div class="col-2">
+				<img src="https://myfitkitbucket.s3.ap-south-1.amazonaws.com/images/logos/logo3.jpg">
+			</div>
+			<div class="col-2">
+				<div class="form-container">
+
+					<div id="Login-form">
+						<p>Admin Login</p>
+						<form method="post">
+							<input type="text" name="admin" placeholder="Admin" autocomplete="off">
+							<input type="password" name="password" placeholder="Password">
+							<button type="submit" id="GenerateOtpBtn" class="btn">Generate OTP</button>
+							<br>
+						</form>
+					</div>
+
+
+					<div id="Otp-form">
+						<p>otp</p>
+						<div class="otp-mssg">An otp has been sent to your Email Address. Enter the OTP</div>
+						<form action="/admin/dashboard" id="OtpForm" method="POST">
+							<input type="text" placeholder="otp" name="otp" max-length="6" autocomplete="off">
+							<br>
+							<button type="submit" class="btn" id="Login">Login</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<script>
+
+			$(document).ready(function(){
+
+				$("#GenerateOtpBtn").click(function(e){
+
+					e.preventDefault();
+
+    				var admin = $("#Login-form").find( "input[name='admin']" ).val()
+    				var password = $("#Login-form").find( "input[name='password']" ).val()
+
+
+					$.post("/admin/login", { 'admin':admin, 'password':password }, function(data){
+
+						if (data.status == 'error')
+						{
+							$('.alert').html(data.message).slideDown("slow")
+											  .addClass("flash-danger").delay(3000).slideUp("slow");
+						}
+						else if (data.status == 'success')
+						{
+							console.log('success')
+							document.getElementById("Login-form").style.transform = "translateX(300px)";
+							document.getElementById("Otp-form").style.transform = "translateX(300px)";
+						}
+
+					});
+				});
+
+
+
+				$("#Login").click(function(e){
+
+					e.preventDefault();
+
+	    			var otp = $("#OtpForm").find( "input[name='otp']" ).val()
+
+					$.post("/admin/otp", { 'otp': otp }, function(data){
+
+						if (data.status == 'error')
+						{
+							console.log('inside if')
+							$('.alert').html(data.message).slideDown("slow")
+												  .addClass("flash-danger").delay(3000).slideUp(100);
+
+							 $("#OtpForm").find( "input[name='otp']" ).val("");
+
+						}
+						else if (data.status == 'success')
+						{
+							$('.alert').fadeOut()
+							$('#OtpForm').submit()
+						}
+
+					});
+				});
+			});
+		</script>
+
+{% endblock %}
